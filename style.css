@@ -6,3 +6,7 @@
     background-color: rgb(81, 81, 81);
     color: white;
 }
+.red-heart:hover{
+    color: crimson;   
+    font-size: 30px; 
+}
