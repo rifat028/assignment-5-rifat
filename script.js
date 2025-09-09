@@ -30,21 +30,34 @@ for(const addHeart of addHearts){
     })
 }
 
+const copyBtns = document.getElementsByClassName('copy-btn')
+for(const copyBtn of copyBtns){
+    copyBtn.addEventListener('click', async () => {
+        const serviceNo=copyBtn.parentElement.parentElement.getElementsByClassName('service-no')[0].innerText
+        copyAlert='Number copied '+serviceNo
+        alert(copyAlert)
+        await navigator.clipboard.writeText(serviceNo);
+        const copyCount=getValue('copy-count')
+        const addValue=1
+        setValue('copy-count',copyCount,addValue)
+    })
+}
+
 const calls = document.getElementsByClassName('call-btn')
 for(const call of calls){
     call.addEventListener('click', function (event){
-        const serviceName=call.parentElement.parentElement.getElementsByTagName('div')[3].getElementsByTagName('p')[0].innerText
-        const serviceNo=call.parentElement.parentElement.getElementsByTagName('div')[3].getElementsByTagName('h1')[0].innerText
+        const serviceName=call.parentElement.parentElement.getElementsByClassName('service-name')[0].innerText
+        const serviceNo=call.parentElement.parentElement.getElementsByClassName('service-no')[0].innerText
         const coinCount=getValue("coin-count")
         if(coinCount>=20){
-            const callAlert='📞you are calling '+serviceName+' at '+serviceNo
+            const callAlert='📞 you are calling '+serviceName+' at '+serviceNo
             alert(callAlert)
             const deductValu=-20  
             setValue('coin-count',coinCount,deductValu)
             addHistory(serviceName,serviceNo)
         }
         else{
-            alert('You do not have sufficient coin')
+            alert('❌ You do not have sufficient coin')
             return
         }
     })
@@ -53,5 +66,7 @@ for(const call of calls){
 document.getElementById('clear-history').addEventListener('click', function (){
     document.getElementById('history-container').innerHTML=''
 })
+
+
 
 
